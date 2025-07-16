@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger Lens</title>
+    
+    <!-- CSS Modules -->
+    <link rel="stylesheet" href="/frontend/css/base.css">
+    <link rel="stylesheet" href="/frontend/css/upload.css">
+    <link rel="stylesheet" href="/frontend/css/processing.css">
+    <link rel="stylesheet" href="/frontend/css/chat.css">
+    <link rel="stylesheet" href="/frontend/css/animations.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Upload Stage -->
+        <div id="uploadStage" class="stage active">
+            <div class="upload-stage">
+                <h1>LedgerLens</h1>
+                <p>Upload your financial documents to get started with intelligent analysis</p>
+                
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" viewBox="0 0 24 24">
+                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                    </svg>
+                    <div class="upload-text">Drop your PDF files here</div>
+                    <div class="upload-subtext">or click to browse</div>
+                </div>
+
+                <input type="file" id="fileInput" class="file-input" multiple accept=".pdf">
+                
+                <div id="selectedFiles" class="selected-files hidden"></div>
+                
+                <button id="uploadBtn" class="upload-btn" disabled>
+                    Process Documents
+                </button>
+
+                <div id="uploadError" class="error hidden"></div>
+            </div>
+        </div>
+
+        <!-- Processing Stage (Legacy - kept for fallback) -->
+        <div id="processingStage" class="stage hidden">
+            <div class="processing-stage">
+                <div class="processing-animation">
+                    <div class="processing-circle"></div>
+                </div>
+                
+                <h2 class="processing-title">Building your Financial RAG</h2>
+                <div id="processingMessage" class="processing-message">
+                    Preparing to process your documents...
+                </div>
+
+                <div class="processing-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+
+                <div class="progress-bar">
+                    <div id="progressFill" class="progress-fill"></div>
+                </div>
+                <div id="progressText" class="progress-text">0% complete</div>
+
+                <div id="processingError" class="error hidden"></div>
+            </div>
+        </div>
+
+        <!-- Chat Stage -->
+        <div id="chatStage" class="stage hidden">
+            <div class="chat-stage">
+                <div class="chat-header">
+                    <div class="chat-title">Financial RAG Assistant</div>
+                    <div class="system-stats">
+                        <div class="stat-item">
+                            <div class="status-dot"></div>
+                            <span id="statusDocs">0 docs</span>
+                        </div>
+                        <div class="stat-item">
+                            <span id="statusChunks">0 chunks</span>
+                        </div>
+                        <div class="stat-item">
+                            <span id="statusEntities">0 entities</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message assistant fade-in">
+                        <div class="message-avatar">FA</div>
+                        <div class="message-content">
+                            Hello! I'm your Financial RAG Assistant. I've successfully processed your documents and built a comprehensive knowledge graph. You can now ask me questions about your financial data, and I'll provide detailed, context-aware responses.
+                            <div class="message-meta">
+                                <span>Ready to help</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <div class="mode-selector">
+                        <button class="mode-btn active" data-mode="hybrid">Hybrid</button>
+                        <button class="mode-btn" data-mode="local">Local</button>
+                        <button class="mode-btn" data-mode="global">Global</button>
+                        <button class="mode-btn" data-mode="mix">Mix</button>
+                        <button class="mode-btn" data-mode="naive">Vector</button>
+                    </div>
+                    <div class="chat-input-wrapper">
+                        <textarea id="chatInput" class="chat-input" placeholder="Ask me about your financial documents..." rows="1"></textarea>
+                        <button id="sendBtn" class="send-btn">
+                            <svg class="send-icon" viewBox="0 0 24 24">
+                                <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Modal Overlay -->
+    <div id="processingOverlay" class="processing-overlay">
+        <div class="processing-modal">
+            <div class="floating-particles" id="floatingParticles"></div>
+            
+            <div class="processing-animation">
+                <div class="processing-circle">
+                    <div class="processing-inner">
+                        <svg class="processing-icon" viewBox="0 0 24 24">
+                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="processing-title">Processing Your Documents</h2>
+            <div id="processingModalMessage" class="processing-message">
+                Please wait while we build your intelligent Financial RAG system...
+            </div>
+            <div id="processingModalSubmessage" class="processing-submessage">
+                This may take a few minutes depending on document size
+            </div>
+
+            <div id="documentList" class="document-list">
+                <!-- Documents will be populated here -->
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div id="progressModalFill" class="progress-fill"></div>
+                </div>
+                <div id="progressModalText" class="progress-text">
+                    <span>0% complete</span>
+                    <span id="progressModalDetails" class="progress-details">Initializing...</span>
+                </div>
+            </div>
+
+            <div id="processingModalError" class="error hidden"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="/frontend/js/config.js"></script>
+    <script src="/frontend/js/utils.js"></script>
+    <script src="/frontend/js/api.js"></script>
+    <script src="/frontend/js/animations.js"></script>
+    <script src="/frontend/js/upload.js"></script>
+    <script src="/frontend/js/processing.js"></script>
+    <script src="/frontend/js/chat.js"></script>
+    <script src="/frontend/js/app.js"></script>
+</body>
+</html>

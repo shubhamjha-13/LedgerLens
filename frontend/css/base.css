@@ -1,0 +1,196 @@
+/* =================================================================
+   Base Styles - Typography, Reset, Layout, Utilities
+   ================================================================= */
+
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #718096;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.success-animation {
+    animation: successBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Stage System */
+.stage {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.stage.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stage-transition-out {
+    animation: slideOut 0.5s ease-in forwards;
+}
+
+.stage-transition-in {
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Button Base */
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Input Base */
+input, textarea {
+    font-family: inherit;
+    outline: none;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    transition: border-color 0.2s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #667eea;
+}
+
+/* Card Base */
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Message States */
+.error {
+    color: #e53e3e;
+    background: #fed7d7;
+    border: 1px solid #feb2b2;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-size: 0.9rem;
+}
+
+.success {
+    color: #38a169;
+    background: #c6f6d5;
+    border: 1px solid #9ae6b4;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-size: 0.9rem;
+}
+
+.warning {
+    color: #d69e2e;
+    background: #faf089;
+    border: 1px solid #f6d55c;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-size: 0.9rem;
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .card {
+        padding: 30px 20px;
+        margin: 10px;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .card {
+        padding: 20px 15px;
+    }
+}

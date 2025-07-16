@@ -1,0 +1,254 @@
+/* =================================================================
+   Upload Stage - File upload interface and interactions
+   ================================================================= */
+
+/* Upload Stage Container */
+.upload-stage {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Upload Area */
+.upload-area {
+    border: 3px dashed #e2e8f0;
+    border-radius: 16px;
+    padding: 60px 20px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+    border-color: #667eea;
+    background: #f7fafc;
+    transform: translateY(-2px);
+}
+
+.upload-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    fill: #a0aec0;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover .upload-icon {
+    fill: #667eea;
+    transform: scale(1.1);
+}
+
+.upload-text {
+    font-size: 1.2rem;
+    color: #4a5568;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.upload-subtext {
+    color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+/* File Input */
+.file-input {
+    display: none;
+}
+
+/* Selected Files */
+.selected-files {
+    text-align: left;
+    margin: 20px 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f7fafc;
+    border-radius: 8px;
+    margin: 8px 0;
+    border-left: 4px solid #667eea;
+    transition: all 0.3s ease;
+}
+
+.file-item:hover {
+    background: #edf2f7;
+    transform: translateX(2px);
+}
+
+.file-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    fill: #667eea;
+    flex-shrink: 0;
+}
+
+.file-details {
+    flex: 1;
+}
+
+.file-name {
+    font-weight: 500;
+    color: #2d3748;
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+.file-size {
+    font-size: 0.8rem;
+    color: #718096;
+}
+
+/* Upload Button */
+.upload-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.upload-btn:hover:not(:disabled)::before {
+    left: 100%;
+}
+
+.upload-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.upload-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.upload-btn:disabled::before {
+    display: none;
+}
+
+.upload-btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Upload Progress Indicator */
+.upload-progress {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f7fafc;
+    border-radius: 8px;
+    border-left: 4px solid #48bb78;
+}
+
+.upload-progress-text {
+    color: #2d3748;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Drag States */
+.upload-area.drag-enter {
+    border-color: #48bb78;
+    background: #f0fff4;
+}
+
+.upload-area.drag-enter .upload-icon {
+    fill: #48bb78;
+    transform: scale(1.2);
+}
+
+.upload-area.drag-reject {
+    border-color: #e53e3e;
+    background: #fef5e7;
+}
+
+.upload-area.drag-reject .upload-icon {
+    fill: #e53e3e;
+}
+
+/* File Type Validation */
+.file-item.invalid {
+    border-left-color: #e53e3e;
+    background: #fed7d7;
+}
+
+.file-item.invalid .file-icon {
+    fill: #e53e3e;
+}
+
+.file-item.invalid .file-name {
+    color: #e53e3e;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .upload-area {
+        padding: 40px 15px;
+    }
+
+    .upload-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .upload-text {
+        font-size: 1.1rem;
+    }
+
+    .upload-btn {
+        width: 100%;
+        padding: 14px 24px;
+        font-size: 1rem;
+    }
+
+    .file-item {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .upload-area {
+        padding: 30px 10px;
+    }
+
+    .upload-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .upload-text {
+        font-size: 1rem;
+    }
+
+    .upload-subtext {
+        font-size: 0.8rem;
+    }
+}
