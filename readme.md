@@ -1,31 +1,31 @@
-# 🏦 FinancialLightRAG Core
+#  FinancialLightRAG Core
 
 **Advanced Graph-Enhanced RAG System for Financial Documents**
 
 This is a sophisticated implementation following LightRAG's architecture, specialized for financial document analysis with advanced graph strategies, dual-level retrieval, and financial domain expertise.
 
-## ✨ Key Features
+##  Key Features
 
-### 🧠 Advanced Graph Intelligence
+###  Advanced Graph Intelligence
 - **Entity & Relationship Extraction**: LLM-powered extraction of financial entities and their relationships
 - **Knowledge Graph Construction**: NetworkX-based graph with financial relationship types
 - **Deduplication**: Intelligent merging of identical entities and relationships
 - **Key-Value Storage**: Efficient retrieval following LightRAG's approach
 
-### 🔍 Sophisticated Retrieval Modes
+###  Sophisticated Retrieval Modes
 - **Local Mode**: Entity-focused retrieval for specific financial data
 - **Global Mode**: Theme-based retrieval exploring broader financial concepts
 - **Hybrid Mode**: Combines local precision with global context
 - **Mix Mode**: Integrates knowledge graph and vector retrieval
 - **Naive Mode**: Simple vector similarity search
 
-### 📊 Financial Domain Specialization
+###  Financial Domain Specialization
 - **Entity Types**: Companies, metrics, products, people, locations, events, risk factors
 - **Relationship Types**: Owns, reports, competes_with, supplies_to, affects, etc.
 - **Financial Chunking**: Smart text segmentation respecting financial document structure
 - **Table Awareness**: Enhanced processing for financial tables and structured data
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Python 3.8+
@@ -66,7 +66,7 @@ if __name__ == "__main__":
 python demo_financial_rag.py
 ```
 
-## 🎯 Advanced Usage
+##  Advanced Usage
 
 ### Different Retrieval Modes
 
@@ -129,7 +129,7 @@ for content, doc_id in documents:
     print(f"Processed {doc_id}: {result}")
 ```
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 ### Core Components
 
@@ -185,7 +185,7 @@ class FinancialRelationship:
     confidence: float
 ```
 
-## 📊 Financial Entity Types
+##  Financial Entity Types
 
 - **COMPANY**: Public/private companies, subsidiaries, competitors
 - **FINANCIAL_METRIC**: Revenue, profit, margins, ratios, KPIs
@@ -196,7 +196,7 @@ class FinancialRelationship:
 - **RISK_FACTOR**: Business risks, market risks, operational risks
 - **REGULATION**: Laws, standards, compliance requirements
 
-## 🔗 Financial Relationship Types
+##  Financial Relationship Types
 
 - **OWNS**: Ownership relationships (parent-subsidiary)
 - **REPORTS**: Reporting relationships (company reports metric)
@@ -210,7 +210,7 @@ class FinancialRelationship:
 - **CORRELATES_WITH**: Correlation relationships
 - **DEPENDS_ON**: Dependency relationships
 
-## 🎛️ Query Parameters
+##  Query Parameters
 
 ```python
 @dataclass
@@ -224,7 +224,7 @@ class QueryParam:
     max_token_for_local_context: int = 4000
 ```
 
-## 📈 Performance & Features
+##  Performance & Features
 
 ### Advanced Capabilities
 - **Graph-Based Indexing**: Entities and relationships stored in NetworkX graph
@@ -259,7 +259,7 @@ working_dir/
 └── embeddings.npy        # Vector embeddings
 ```
 
-## 🧪 Testing
+##  Testing
 
 Run the comprehensive demo to see all features:
 ```bash
@@ -300,7 +300,7 @@ The demo will:
 - **Example**: Quick keyword-based search
 - **Retrieval**: Basic vector similarity search
 
-## 🚀 Next Steps
+##  Next Steps
 
 This core system provides the foundation for:
 1. **Web Interface**: Build Gradio/Streamlit UI
@@ -309,7 +309,7 @@ This core system provides the foundation for:
 4. **Domain Extensions**: Extend to other financial document types
 5. **Performance Optimization**: Caching, indexing, and scaling improvements
 
-## 📝 License
+##  License
 
 This project demonstrates advanced RAG architecture patterns for financial document analysis.
 
